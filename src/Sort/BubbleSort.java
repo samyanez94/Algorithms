@@ -20,8 +20,10 @@ public class BubbleSort {
      * @param unsorted the array to be sorted.
      */
     public static <T extends Comparable<T>> void sort(T[] unsorted) {
-        for (int i = 0; i < unsorted.length - 1; i++)
-            for (int j = 0; j < unsorted.length - i - 1; j++)
+        int length = unsorted.length;
+
+        for (int i = 0; i < length - 1; i++)
+            for (int j = 0; j < length - i - 1; j++)
                 if (unsorted[j].compareTo(unsorted[j + 1]) > 0)
                     swap(j, j + 1, unsorted);
     }
