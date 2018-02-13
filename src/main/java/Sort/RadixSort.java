@@ -10,7 +10,7 @@ import java.util.Queue;
  * names or dates) and specially formatted floating point numbers, radix sort is not limited to
  * integers.
  *
- * NOTE: This radix sort only works for positive integers
+ * WARNING: This radix sort only works for positive integers
  *
  * Average case = O(n*k) Worst case = O(n*k) Best case = O(n*k)
  *
@@ -31,7 +31,7 @@ public class RadixSort {
      * @param unsorted the array of Integers to be sorted.
      */
     @SuppressWarnings("unchecked")
-    public static void sort(Integer... unsorted) {
+    public static void sort(Integer... unsorted) throws NegativeIntegerException {
 
         Queue<Integer>[] buckets = new Queue[RADIX];
 
@@ -40,18 +40,23 @@ public class RadixSort {
 
         // Creates buckets
         for (int i = 0; i < RADIX; i++)
-            buckets[i] = new LinkedList<Integer>();
+            buckets[i] = new LinkedList<>();
 
         for (int i = 0; i <= numberOfDigits; i++) {
 
             // Sorts the list
-            for (int j = 0; j < unsorted.length; j++) {
-                digit = getDigit(unsorted[j], i + 1);
-                buckets[digit].add(unsorted[j]);
+            for (int key : unsorted) {
+                if (key < 0)
+                    throw new NegativeIntegerException("Only positive integers are allowed in " +
+                            "this radix sort. Negative number found: " + key);
+
+                digit = getDigit(key, i + 1);
+                buckets[digit].add(key);
             }
 
             // Gathers the numbers back in the list
             int counter = 0;
+
             for (int j = 0; j < RADIX; j++) {
                 while (!(buckets[j].isEmpty())) {
                     unsorted[counter] = buckets[j].poll();
@@ -69,7 +74,7 @@ public class RadixSort {
      */
     private static int getMaxNumberOfDigits(Integer... array) {
         int max = Integer.MIN_VALUE;
-        int temp = 0;
+        int temp;
         for (int i : array) {
             temp = (int) Math.log10(i) + 1;
             if (temp > max)
@@ -86,5 +91,14 @@ public class RadixSort {
      */
     private static int getDigit(int number, int n) {
         return (int) ((number / Math.pow(10, n - 1)) % 10);
+    }
+
+    /**
+     * Custom exception class for negative integers.
+     */
+    static class NegativeIntegerException extends Exception {
+        NegativeIntegerException(String message) {
+            super(message);
+        }
     }
 }
