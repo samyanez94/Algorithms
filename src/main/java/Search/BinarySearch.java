@@ -1,4 +1,4 @@
-package main.java.Search;
+package Search;
 
 /**
  * Binary search is a search algorithm that finds the position of a target value within a sorted
