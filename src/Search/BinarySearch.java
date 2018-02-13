@@ -22,7 +22,7 @@ public class BinarySearch {
      * @param target the value being searched
      * @param list   the array of Comparable objects to be searched
      */
-    public static <T extends Comparable<T>> boolean search(T target, T[] list) {
+    public static <T extends Comparable<T>> boolean search(T target, T... list) {
         return search(target, 0, list.length - 1, list);
     }
 
@@ -36,7 +36,7 @@ public class BinarySearch {
      * @param list   the array of Comparable objects to be searched
      * @return true if the value is found. False otherwise.
      */
-    private static <T extends Comparable<T>> boolean search(T target, int min, int max, T[] list) {
+    private static <T extends Comparable<T>> boolean search(T target, int min, int max, T... list) {
         if (min > max)
             return false;
 

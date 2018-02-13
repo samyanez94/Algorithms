@@ -31,7 +31,7 @@ public class RadixSort {
      * @param unsorted the array of Integers to be sorted.
      */
     @SuppressWarnings("unchecked")
-    public static void sort(Integer[] unsorted) {
+    public static void sort(Integer... unsorted) {
 
         Queue<Integer>[] buckets = new Queue[RADIX];
 
@@ -67,7 +67,7 @@ public class RadixSort {
      *
      * @param array the array of Integers to be sorted.
      */
-    private static int getMaxNumberOfDigits(Integer[] array) {
+    private static int getMaxNumberOfDigits(Integer... array) {
         int max = Integer.MIN_VALUE;
         int temp = 0;
         for (int i : array) {

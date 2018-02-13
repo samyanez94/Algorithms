@@ -22,7 +22,7 @@ public class LinearSearch {
      * @param list   the array of Comparable objects to be searched.
      * @return true if the target is found. False otherwise.
      */
-    public static <T> boolean search(T target, T[] list) {
+    public static <T> boolean search(T target, T... list) {
         for (T element : list) {
             if (element.equals(target))
                 return true;

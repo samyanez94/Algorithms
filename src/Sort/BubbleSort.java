@@ -19,7 +19,7 @@ public class BubbleSort {
      *
      * @param unsorted the array to be sorted.
      */
-    public static <T extends Comparable<T>> void sort(T[] unsorted) {
+    public static <T extends Comparable<T>> void sort(T... unsorted) {
         int length = unsorted.length;
 
         for (int i = 0; i < length - 1; i++)
@@ -35,7 +35,7 @@ public class BubbleSort {
      * @param index2 the index of the second object in the array.
      * @param array  the array that contains the objects.
      */
-    private static <T extends Comparable<T>> void swap(int index1, int index2, T[] array) {
+    private static <T extends Comparable<T>> void swap(int index1, int index2, T... array) {
         T value = array[index1];
         array[index1] = array[index2];
         array[index2] = value;

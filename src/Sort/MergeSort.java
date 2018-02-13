@@ -21,8 +21,8 @@ public class MergeSort {
      *
      * @param unsorted the array to be sorted.
      */
-    public static <T extends Comparable<T>> void sort(T[] unsorted) {
-        sort(unsorted, 0, unsorted.length - 1);
+    public static <T extends Comparable<T>> void sort(T... unsorted) {
+        sort(0, unsorted.length - 1, unsorted);
     }
 
     /**
@@ -32,12 +32,12 @@ public class MergeSort {
      * @param min      the lower index of the array to be sorted.
      * @param max      the upper index of the array to be sorted.
      */
-    private static <T extends Comparable<T>> void sort(T[] unsorted, int min, int max) {
+    private static <T extends Comparable<T>> void sort(int min, int max, T... unsorted) {
         if (min < max) {
             int mid = (min + max) / 2;
-            sort(unsorted, min, mid);
-            sort(unsorted, mid + 1, max);
-            merge(unsorted, min, mid, max);
+            sort(min, mid, unsorted);
+            sort(mid + 1, max, unsorted);
+            merge(min, mid, max, unsorted);
         }
     }
 
@@ -49,8 +49,7 @@ public class MergeSort {
      * @param mid      the upper index of the first sub-array.
      * @param last     the upper index of the second sub-array.
      */
-    private static <T extends Comparable<T>> void merge(T[] unsorted, int first, int mid, int last) {
-        @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> void merge(int first, int mid, int last, T... unsorted) {
         T[] temp = ((T[]) (new Comparable[unsorted.length]));
 
         int index = first;

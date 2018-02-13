@@ -21,7 +21,7 @@ public class InsertionSort {
      *
      * @param unsorted the array to be sorted.
      */
-    public static <T extends Comparable<T>> void sort(T[] unsorted) {
+    public static <T extends Comparable<T>> void sort(T... unsorted) {
         for (int i = 1; i < unsorted.length; i++) {
             for (int j = i; j > 0; j--) {
                 if (unsorted[j].compareTo(unsorted[j - 1]) < 0)
@@ -37,7 +37,7 @@ public class InsertionSort {
      * @param index2 the index of the second object in the array.
      * @param array  the array that contains the objects.
      */
-    private static <T extends Comparable<T>> void swap(int index1, int index2, T[] array) {
+    private static <T extends Comparable<T>> void swap(int index1, int index2, T... array) {
         T value = array[index1];
         array[index1] = array[index2];
         array[index2] = value;

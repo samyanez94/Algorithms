@@ -18,7 +18,7 @@ public class QuickSort {
      *
      * @param unsorted the array to be sorted.
      */
-    public static <T extends Comparable<T>> void sort(T[] unsorted) {
+    public static <T extends Comparable<T>> void sort(T... unsorted) {
         sort(0, unsorted.length - 1, unsorted);
     }
 
@@ -29,7 +29,7 @@ public class QuickSort {
      * @param max      the upper index of the array to be sorted.
      * @param unsorted the array to be sorted.
      */
-    private static <T extends Comparable<T>> void sort(int min, int max, T[] unsorted) {
+    private static <T extends Comparable<T>> void sort(int min, int max, T... unsorted) {
         if (max > min) {
 
             T pivot = unsorted[max];
@@ -53,7 +53,7 @@ public class QuickSort {
      * @param index2 the index of the second object in the array.
      * @param array  the array that contains the objects.
      */
-    private static <T extends Comparable<T>> void swap(int index1, int index2, T[] array) {
+    private static <T extends Comparable<T>> void swap(int index1, int index2, T... array) {
         T value = array[index1];
         array[index1] = array[index2];
         array[index2] = value;
