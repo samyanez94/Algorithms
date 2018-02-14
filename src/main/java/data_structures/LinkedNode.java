@@ -1,7 +1,7 @@
 package data_structures;
 
 /**
- * Represents a single linked node in a linked list.
+ * Represents a node in a linked list.
  *
  * Reference: Java Software Structures by Lewis and Chase
  *
@@ -22,7 +22,7 @@ public class LinkedNode<T> {
     }
 
     /**
-     * Creates a node that stores the specified element.
+     * Creates a node storing the specified element.
      *
      * @param element element to be stored
      */
