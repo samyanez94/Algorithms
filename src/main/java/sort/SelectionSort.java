@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 /**
  * One of the simplest sorting algorithms works as follows: First, find the smallest item in the

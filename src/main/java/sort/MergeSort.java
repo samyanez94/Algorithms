@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 /**
  * Merge sort is a divide and conquer algorithm that was invented by John Von Neumann in 1945. Merge

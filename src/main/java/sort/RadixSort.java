@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 import java.util.LinkedList;
 import java.util.Queue;

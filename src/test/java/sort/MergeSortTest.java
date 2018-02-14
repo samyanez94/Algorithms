@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
  @author Samuel Yanez <samuelyanez94@gmail.com>
  */
 
-class InsertionSortTest {
+class MergeSortTest {
 
     // Test #1: Asserts the sort method sorts and array of integers
     @Test
@@ -16,7 +16,7 @@ class InsertionSortTest {
         Integer[] expected = {1, 2, 3, 4, 5};
         Integer[] actual = {2, 3, 4, 1, 5};
 
-        InsertionSort.sort(actual);
+        MergeSort.sort(actual);
 
         assertArrayEquals(expected, actual);
     }
@@ -27,7 +27,7 @@ class InsertionSortTest {
         Integer[] expected = {};
         Integer[] actual = {};
 
-        InsertionSort.sort(actual);
+        MergeSort.sort(actual);
 
         assertArrayEquals(expected, actual);
     }
@@ -38,7 +38,7 @@ class InsertionSortTest {
         Integer[] expected = {-10, -5, 0, 3, 7, 45};
         Integer[] actual = {45, 0, 3, -5, -10, 7};
 
-        InsertionSort.sort(actual);
+        MergeSort.sort(actual);
 
         assertArrayEquals(expected, actual);
     }
@@ -49,7 +49,7 @@ class InsertionSortTest {
         Integer[] expected = {0, 1, 2, 2, 2, 3, 3, 4};
         Integer[] actual = {2, 2, 3, 0, 3, 2, 4, 1};
 
-        InsertionSort.sort(actual);
+        MergeSort.sort(actual);
 
         assertArrayEquals(expected, actual);
     }
@@ -60,7 +60,7 @@ class InsertionSortTest {
         Double[] expected = {-0.48, -0.38, 0.0, 2.2, 3.4, 5.6};
         Double[] actual = {5.6, 0.0, -0.38, -0.48, 2.2, 3.4};
 
-        InsertionSort.sort(actual);
+        MergeSort.sort(actual);
 
         assertArrayEquals(expected, actual);
     }
@@ -71,7 +71,7 @@ class InsertionSortTest {
         String[] expected = {"Chad", "Luis", "Luis", "Nicolas", "Samuel"};
         String[] actual = {"Samuel", "Nicolas", "Luis", "Luis", "Chad"};
 
-        InsertionSort.sort(actual);
+        MergeSort.sort(actual);
 
         assertArrayEquals(expected, actual);
     }

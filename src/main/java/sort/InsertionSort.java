@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 /**
  * The algorithm that people often use to sort bridge hands is to consider the cards one at a time,

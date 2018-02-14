@@ -1,4 +1,4 @@
-package Sort;
+package sort;
 
 /**
  * Quicksort is a divide-and-conquer method for sorting. It works by partitioning an array into two

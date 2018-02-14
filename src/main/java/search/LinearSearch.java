@@ -1,4 +1,4 @@
-package Search;
+package search;
 
 /**
  * A straightforward way to perform a search in which we start at the beginning of the list and
