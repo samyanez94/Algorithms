@@ -37,7 +37,7 @@ public class InsertionSort {
      * @param index2 the index of the second object in the array.
      * @param array  the array that contains the objects.
      */
-    private static <T extends Comparable<T>> void swap(int index1, int index2, T... array) {
+    private static <T> void swap(int index1, int index2, T... array) {
         T value = array[index1];
         array[index1] = array[index2];
         array[index2] = value;
