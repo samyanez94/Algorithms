@@ -112,10 +112,8 @@ public class ArrayStack<T> implements Stack<T> {
     public String toString() {
         StringBuilder str = new StringBuilder();
 
-        for (int i = top - 1; i >= 0; i--) {
-            str.append(stack[i].toString());
-            str.append(" ");
-        }
+        for (int i = top - 1; i >= 0; i--)
+            str.append(stack[i].toString()).append(" ");
 
         return str.toString();
     }
