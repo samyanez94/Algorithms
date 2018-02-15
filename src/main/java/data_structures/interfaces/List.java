@@ -4,9 +4,10 @@ import java.util.Iterator;
 
 /**
  * A list or sequence is an abstract data type that represents a countable number of ordered values,
- * where the same value may occur more than once. List defines the interface to a general list
- * collection. Specific types of lists will implement this interface to complete the set of
- * necessary operations.
+ * where the same value may occur more than once.
+ *
+ * List defines the interface to a general list collection. Specific types of lists will implement
+ * this interface to complete the set of necessary operations.
  *
  * Reference: Java Software Structures by Lewis and Chase
  *
