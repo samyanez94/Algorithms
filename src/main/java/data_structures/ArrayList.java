@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
  * @author Samuel Yanez <samuelyanez94@gmail.com>
  */
 
-public class ArrayList<T> implements List<T> {
+public class ArrayList<T> implements List<T>, Iterable<T> {
 
     private final static int DEFAULT_CAPACITY = 10;
 
