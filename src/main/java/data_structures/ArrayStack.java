@@ -25,7 +25,7 @@ public class ArrayStack<T> implements Stack<T> {
 
 
     /**
-     * Creates an empty stack using the default capacity.
+     * Creates a new stack using the default capacity.
      */
     public ArrayStack() {
         this(DEFAULT_CAPACITY);
@@ -66,6 +66,7 @@ public class ArrayStack<T> implements Stack<T> {
      * Removes and returns the top element from the stack.
      *
      * @return the element removed from the stack
+     * @throws EmptyCollectionException if the stack is empty
      */
     public T pop() {
         if (isEmpty())
@@ -78,6 +79,7 @@ public class ArrayStack<T> implements Stack<T> {
      * Returns the top element of the stack without removing it.
      *
      * @return the element on top of the stack
+     * @throws EmptyCollectionException if the stack is empty
      */
     public T peek() {
         if (isEmpty())

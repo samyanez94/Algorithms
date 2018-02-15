@@ -30,7 +30,7 @@ public class LinkedStack<T> implements Stack<T> {
     /**
      * Adds an element to the top of the stack.
      *
-     * @param element element to be pushed on stack.
+     * @param element element to be pushed on stack
      */
     public void push(T element) {
         LinkedNode<T> temp = new LinkedNode<T>(element);
@@ -43,8 +43,8 @@ public class LinkedStack<T> implements Stack<T> {
     /**
      * Removes the element at the top of the stack and returns a reference to it.
      *
-     * @return element from top of stack.
-     * @throws EmptyCollectionException if the stack is empty.
+     * @return element from top of stack
+     * @throws EmptyCollectionException if the stack is empty
      */
     public T pop() throws EmptyCollectionException {
         if (isEmpty())
@@ -61,8 +61,8 @@ public class LinkedStack<T> implements Stack<T> {
      * Returns a reference to the element at the top of the stack. The element is not removed from
      * the stack.
      *
-     * @return element on top of stack.
-     * @throws EmptyCollectionException if the stack is empty.
+     * @return element on top of stack
+     * @throws EmptyCollectionException if the stack is empty
      */
     public T peek() throws EmptyCollectionException {
         if (isEmpty())
@@ -74,7 +74,7 @@ public class LinkedStack<T> implements Stack<T> {
     /**
      * Returns true if the stack is empty and false otherwise.
      *
-     * @return true if stack is empty.
+     * @return true if stack is empty
      */
     public boolean isEmpty() {
         return (count == 0);
@@ -83,7 +83,7 @@ public class LinkedStack<T> implements Stack<T> {
     /**
      * Returns the number of elements in the stack.
      *
-     * @return number of elements in the stack.
+     * @return number of elements in the stack
      */
     public int size() {
         return count;
@@ -92,7 +92,7 @@ public class LinkedStack<T> implements Stack<T> {
     /**
      * Returns a string representation of a stack.
      *
-     * @return String representing the stack.
+     * @return String representing the stack
      */
     public String toString() {
         StringBuilder str = new StringBuilder();
