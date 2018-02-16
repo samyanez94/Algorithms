@@ -25,8 +25,8 @@ public class ArrayBinaryTree<T> implements BinaryTree<T> {
 
     private static final int DEFAULT_CAPACITY = 50;
 
-    private T[] tree;
-    private int count;
+    protected T[] tree;
+    protected int count;
 
     private int modCount;
 
