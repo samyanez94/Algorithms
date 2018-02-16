@@ -1,10 +1,9 @@
 package data_structures;
 
 import data_structures.exceptions.EmptyCollectionException;
-import data_structures.interfaces.BinaryTree;
 import data_structures.exceptions.ElementNotFoundException;
-import data_structures.exceptions.ParentNotFoundException;
 import data_structures.exceptions.ChildNotFoundException;
+import data_structures.interfaces.BinaryTree;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;

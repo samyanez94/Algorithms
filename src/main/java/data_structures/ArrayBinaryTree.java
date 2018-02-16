@@ -1,13 +1,15 @@
 package data_structures;
 
 import data_structures.exceptions.EmptyCollectionException;
-import data_structures.interfaces.BinaryTree;
 import data_structures.exceptions.ElementNotFoundException;
-import data_structures.exceptions.ParentNotFoundException;
 import data_structures.exceptions.ChildNotFoundException;
+import data_structures.interfaces.BinaryTree;
+
 
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Implements an array representation of a binary tree. A binary tree is a tree data structure in
@@ -26,7 +28,7 @@ public class ArrayBinaryTree<T> implements BinaryTree<T> {
     private T[] tree;
     private int count;
 
-    protected int modCount;
+    private int modCount;
 
     /**
      * Creates a new binary tree.
@@ -57,28 +59,6 @@ public class ArrayBinaryTree<T> implements BinaryTree<T> {
     }
 
     /**
-     * Protected method that returns the index of the parent of an element in the tree.
-     *
-     * @param Childindex index of the child element in the tree
-     * @return index of the parent element
-     */
-    protected int getParentIndex(int Childindex) {
-        return (Childindex - 1) / 2;
-    }
-
-    /**
-     * Returns the parent element of a child in the tree.
-     *
-     * @param child the child element in the tree
-     * @return the parent of the child node
-     * @throws ElementNotFoundException if the child is not in the tree
-     * @throws ParentNotFoundException  if the node does not has a child
-     */
-    public T getParent(T child) {
-        return null;
-    }
-
-    /**
      * Returns the left child of a node in the tree.
      *
      * @param parent the parent element in the tree
@@ -87,7 +67,15 @@ public class ArrayBinaryTree<T> implements BinaryTree<T> {
      * @throws ChildNotFoundException   if the node does not has a left child
      */
     public T getLeftChild(T parent) {
-        return null;
+        if (!contains(parent))
+            throw new ElementNotFoundException("Binary Tree");
+
+        T leftChild = tree[getLeftChildIndex(find(parent))];
+
+        if (leftChild == null)
+            throw new ChildNotFoundException(ChildNotFoundException.BinaryTreeDirection.LEFT);
+
+        return leftChild;
     }
 
     /**
@@ -99,7 +87,38 @@ public class ArrayBinaryTree<T> implements BinaryTree<T> {
      * @throws ChildNotFoundException   if the node does not has a right child
      */
     public T getRightChild(T parent) {
-        return null;
+        if (!contains(parent))
+            throw new ElementNotFoundException("Binary Tree");
+
+        T rightChild = tree[getRightChildIndex(find(parent))];
+
+        if (rightChild == null)
+            throw new ChildNotFoundException(ChildNotFoundException.BinaryTreeDirection.RIGHT);
+
+        return rightChild;
+    }
+
+
+    /**
+     * Protected method that returns the index of the left child of an element in the tree.
+     *
+     * @param index index of the parent element in the tree
+     * @return index of the left child
+     */
+    private int getLeftChildIndex(int index) {
+        /* TODO:  Throw exception when index is out of bounds*/
+        return 2 * index + 1;
+    }
+
+    /**
+     * Protected method that returns the index of the right child of an element in the tree.
+     *
+     * @param index index of the parent element in the tree
+     * @return index of the right child
+     */
+    private int getRightChildIndex(int index) {
+        /* TODO:  Throw exception when index is out of bounds*/
+        return 2 * index + 2;
     }
 
     /**
@@ -123,36 +142,26 @@ public class ArrayBinaryTree<T> implements BinaryTree<T> {
      * @return true if the tree contains the target element
      */
     public boolean contains(T element) {
-        if (find(element) == null)
+        if (find(element) == -1)
             return false;
         else
             return true;
     }
 
     /**
-     * Returns a reference to the specified target element if it is found in this binary tree.
-     * Throws a ElementNotFoundException if the specified target element is not found in the binary
-     * tree.
+     * Returns the position index of a target element if it is found in this binary tree. Throws a
+     * ElementNotFoundException if the specified target element is not found in the binary tree.
      *
      * @param target the element being sought in the tree
-     * @return true if the element is in the tree
-     * @throws ElementNotFoundException if the element is not in the tree
+     * @return index of a target element or -1 if not element was found
      */
-    private T find(T target) throws ElementNotFoundException {
-        T temp = null;
-        boolean found = false;
 
-        for (int i = 0; i < tree.length && !found; i++)
-            if (tree[i] != null)
-                if (target.equals(tree[i])) {
-                    found = true;
-                    temp = tree[i];
-                }
+    private int find(T target) {
+        for (int i = 0; i < tree.length; i++)
+            if (tree[i] != null && tree[i].equals(target))
+                return i;
 
-        if (!found)
-            throw new ElementNotFoundException("ArrayBinaryTree");
-
-        return temp;
+        return -1;
     }
 
     /**
@@ -174,38 +183,161 @@ public class ArrayBinaryTree<T> implements BinaryTree<T> {
     }
 
     /**
-     * Returns an iterator over the elements of this tree.
+     * Returns a string representation of this binary tree showing the nodes in an inorder fashion.
      *
-     * @return an iterator over the elements of this binary tree
+     * @return a string representation of the binary tree
+     */
+    public String toString() {
+        ArrayList<T> list = new ArrayList<T>();
+        inOrder(0, list);
+        return list.toString();
+    }
+
+    /**
+     * Returns an iterator over the elements of this binary tree using the iteratorInOrder method
+     *
+     * @return an iterator over the binary tree
      */
     public Iterator<T> iterator() {
-        return null;
+        return this.iteratorInOrder();
     }
 
     /**
-     * Returns an iterator that represents an inorder traversal on this binary tree.
+     * Performs an inorder traversal on this binary tree by calling an overloaded, recursive inorder
+     * method that starts with the root.
      *
-     * @return an iterator over the elements of this binary tree
+     * @return an iterator over the binary tree
      */
     public Iterator<T> iteratorInOrder() {
-        return null;
+        ArrayList<T> tempList = new ArrayList<T>();
+        inOrder(0, tempList);
+
+        return new TreeIterator(tempList.iterator());
     }
 
     /**
-     * Returns an iterator that represents a preorder traversal on this binary tree.
+     * Performs a recursive inorder traversal.
      *
-     * @return an iterator over the elements of this binary tree
+     * @param node the index of the node used in the traversal
+     * @param list the temporary list used in the traversal
+     */
+    private void inOrder(int node, ArrayList<T> list) {
+        if (node < tree.length)
+            if (tree[node] != null) {
+                inOrder(node * 2 + 1, list);
+                list.add(tree[node]);
+                inOrder((node + 1) * 2, list);
+            }
+    }
+
+    /**
+     * Performs an preorder traversal on this binary tree by calling an overloaded, recursive
+     * preorder method that starts with the root.
+     *
+     * @return an iterator over the binary tree
      */
     public Iterator<T> iteratorPreOrder() {
-        return null;
+        ArrayList<T> list = new ArrayList<T>();
+        preOrder(0, list);
+
+        return new TreeIterator(list.iterator());
     }
 
     /**
-     * Returns an iterator that represents a postorder traversal on this binary tree.
+     * Performs a recursive preorder traversal.
      *
-     * @return an iterator over the elements of this binary tree
+     * @param node the index of the node used in the traversal
+     * @param list the temporary list used in the traversal
+     */
+    private void preOrder(int node, ArrayList<T> list) {
+        if (node < tree.length)
+            if (tree[node] != null) {
+                list.add(tree[node]);
+                preOrder(node * 2 + 1, list);
+                preOrder((node + 1) * 2, list);
+            }
+    }
+
+    /**
+     * Performs an postorder traversal on the binary tree by calling an overloaded, recursive
+     * postorder method that starts with the root.
+     *
+     * @return an iterator over the binary tree
      */
     public Iterator<T> iteratorPostOrder() {
-        return null;
+        ArrayList<T> list = new ArrayList<T>();
+        postOrder(0, list);
+
+        return new TreeIterator(list.iterator());
+    }
+
+    /**
+     * Performs a recursive postorder traversal.
+     *
+     * @param node the index of the node used in the traversal
+     * @param list the temporary list used in the traversal
+     */
+    private void postOrder(int node, ArrayList<T> list) {
+        if (node < tree.length)
+            if (tree[node] != null) {
+                postOrder(node * 2 + 1, list);
+                postOrder((node + 1) * 2, list);
+                list.add(tree[node]);
+            }
+    }
+
+    /**
+     * Inner class to represent an iterator over the elements of this tree
+     */
+    private class TreeIterator implements Iterator<T> {
+        private int expectedModCount;
+        private Iterator<T> iter;
+
+        /**
+         * Sets up this iterator using the specified iterator.
+         *
+         * @param iter the list iterator created by a tree traversal
+         */
+        TreeIterator(Iterator<T> iter) {
+            this.iter = iter;
+            expectedModCount = modCount;
+        }
+
+        /**
+         * Returns true if this iterator has at least one more element to deliver in the iteration.
+         *
+         * @return true if this iterator has at least one more element to deliver in the iteration
+         * @throws ConcurrentModificationException if the collection has changed while the iterator
+         *                                         is in use
+         */
+        public boolean hasNext() throws ConcurrentModificationException {
+            if (!(modCount == expectedModCount))
+                throw new ConcurrentModificationException();
+
+            return (iter.hasNext());
+        }
+
+        /**
+         * Returns the next element in the iteration. If there are no more elements in this
+         * iteration, a NoSuchElementException is thrown.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iterator is empty
+         */
+        public T next() throws NoSuchElementException {
+            if (hasNext())
+                return (iter.next());
+            else
+                throw new NoSuchElementException();
+        }
+
+        /**
+         * The remove operation is not supported.
+         *
+         * @throws UnsupportedOperationException if the remove operation is called
+         */
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }
