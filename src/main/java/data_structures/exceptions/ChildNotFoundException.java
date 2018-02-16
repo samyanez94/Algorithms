@@ -15,7 +15,7 @@ public class ChildNotFoundException extends RuntimeException {
         super("Node does not has a " + direction.directionString + " child.");
     }
 
-    enum BinaryTreeDirection {
+    public enum BinaryTreeDirection {
         LEFT("left"),
         RIGHT("right");
 

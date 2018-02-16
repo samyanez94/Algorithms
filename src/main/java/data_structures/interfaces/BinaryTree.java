@@ -16,16 +16,6 @@ import data_structures.exceptions.ChildNotFoundException;
 public interface BinaryTree<T> extends Tree<T> {
 
     /**
-     * Returns the parent element of a child in the tree.
-     *
-     * @param child the child element in the tree
-     * @return the parent of the child node
-     * @throws ElementNotFoundException if the child is not in the tree
-     * @throws ParentNotFoundException  if the node does not has a child
-     */
-    T getParent(T child);
-
-    /**
      * Returns the left child of a node in the tree.
      *
      * @param parent the parent element in the tree

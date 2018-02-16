@@ -19,7 +19,7 @@ import java.util.Iterator;
  * @author Samuel Yanez <samuelyanez94@gmail.com>
  */
 
-public class ArrayBinaryTree<T extends Comparable<T>> implements BinaryTree<T> {
+public class ArrayBinaryTree<T> implements BinaryTree<T> {
 
     private static final int DEFAULT_CAPACITY = 50;
 
