@@ -68,11 +68,4 @@ public interface List<T> {
      */
     String toString();
 
-    /**
-     * Returns an iterator for the elements in the list.
-     *
-     * @return an iterator over the elements in this list
-     */
-    Iterator<T> iterator();
-
 }
