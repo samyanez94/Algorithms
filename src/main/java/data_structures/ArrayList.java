@@ -4,21 +4,18 @@ import data_structures.exceptions.EmptyCollectionException;
 import data_structures.interfaces.List;
 
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
 
 
 /**
  * Resizable array implementation of a list. A list or sequence is an abstract data type that
  * represents a countable number of ordered values, where the same value may occur more than once.
- *
+ * <p>
  * Reference: Java Software Structures by Lewis and Chase
  *
  * @author Samuel Yanez <samuelyanez94@gmail.com>
  */
 
-public class ArrayList<T> implements List<T>, Iterable<T> {
+public class ArrayList<T> implements List<T> {
 
     private final static int DEFAULT_CAPACITY = 10;
 
@@ -197,72 +194,5 @@ public class ArrayList<T> implements List<T>, Iterable<T> {
             str.append(element).append(" ");
 
         return str.toString();
-    }
-
-    /**
-     * Returns an iterator for the elements in this list.
-     *
-     * @return an iterator over the elements in this list
-     */
-    public Iterator<T> iterator() {
-        return new ArrayListIterator(modCount);
-    }
-
-    /**
-     * ArrayListIterator iterates over the elements of an ArrayList.
-     */
-    private class ArrayListIterator implements Iterator<T> {
-        private int iteratorModCount;
-        private int next;
-
-        /**
-         * Sets up this iterator using the specified modCount.
-         *
-         * @param modCount the current modification count for the ArrayList
-         */
-        ArrayListIterator(int modCount) {
-            iteratorModCount = modCount;
-            next = 0;
-        }
-
-        /**
-         * Returns true if this iterator has at least one more element to deliver in the iteration.
-         *
-         * @return true if this iterator has at least one more element to deliver in the iteration
-         * @throws ConcurrentModificationException if the collection has changed while the iterator
-         *                                         is in use
-         */
-        public boolean hasNext() throws ConcurrentModificationException {
-            if (iteratorModCount != modCount)
-                throw new ConcurrentModificationException();
-
-            return (next < size);
-        }
-
-        /**
-         * Returns the next element in the iteration. If there are no more elements in this
-         * iteration, a NoSuchElementException is thrown.
-         *
-         * @return the next element in the iteration
-         * @throws NoSuchElementException          if an element not found exception occurs
-         * @throws ConcurrentModificationException if the collection has changed
-         */
-        public T next() throws ConcurrentModificationException {
-            if (!hasNext())
-                throw new NoSuchElementException();
-
-            next++;
-
-            return list[next - 1];
-        }
-
-        /**
-         * The remove operation is not supported in this collection.
-         *
-         * @throws IllegalStateException if the method is called before the first next() call
-         */
-        public void remove() throws IllegalStateException {
-            throw new UnsupportedOperationException();
-        }
     }
 }

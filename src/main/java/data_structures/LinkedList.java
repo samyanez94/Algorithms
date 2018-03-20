@@ -4,20 +4,16 @@ import data_structures.exceptions.ElementNotFoundException;
 import data_structures.exceptions.EmptyCollectionException;
 import data_structures.interfaces.List;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 /**
  * Linked implementation of a list. A list or sequence is an abstract data type that represents a
  * countable number of ordered values, where the same value may occur more than once.
- *
+ * <p>
  * Reference: Java Software Structures by Lewis and Chase
  *
  * @author Samuel Yanez <samuelyanez94@gmail.com>
  */
 
-public class LinkedList<T> implements List<T>, Iterable<T> {
+public class LinkedList<T> implements List<T> {
 
     private LinkedNode<T> front, rear;
     private int size;
@@ -260,71 +256,5 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
             str.append(current.getElement()).append(" ");
 
         return str.toString();
-    }
-
-    /**
-     * Returns an iterator for the elements in this list.
-     *
-     * @return an iterator over the elements of the list
-     */
-    public Iterator<T> iterator() {
-        return new LinkedListIterator(modCount);
-    }
-
-    /**
-     * LinkedIterator represents an iterator for a linked list of linear nodes.
-     */
-    private class LinkedListIterator implements Iterator<T> {
-        private int iteratorModCount;
-        private LinkedNode<T> next;
-
-        /**
-         * Sets up this iterator using the specified modCount.
-         *
-         * @param modCount the current modification count for the ArrayList
-         */
-        LinkedListIterator(int modCount) {
-            next = front;
-            iteratorModCount = modCount;
-        }
-
-        /**
-         * Returns true if this iterator has at least one more element to deliver in the iteration.
-         *
-         * @return true if this iterator has at least one more element to deliver in the iteration
-         * @throws ConcurrentModificationException if the collection has changed while the iterator
-         *                                         is in use
-         */
-        public boolean hasNext() throws ConcurrentModificationException {
-            if (iteratorModCount != modCount)
-                throw new ConcurrentModificationException();
-
-            return (next != null);
-        }
-
-        /**
-         * Returns the next element in the iteration. If there are no more elements in this
-         * iteration, a NoSuchElementException is thrown.
-         *
-         * @return the next element in the iteration
-         * @throws NoSuchElementException if the iterator is empty
-         */
-        public T next() throws ConcurrentModificationException {
-            if (!hasNext())
-                throw new NoSuchElementException();
-
-            T result = next.getElement();
-            next = next.getNext();
-            return result;
-        }
-
-        /**
-         * The remove operation is not supported.
-         *
-         * @throws UnsupportedOperationException if the remove operation is called
-         */
-        public void remove() throws UnsupportedOperationException {
-            throw new UnsupportedOperationException();
-        }
     }
 }
