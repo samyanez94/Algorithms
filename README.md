@@ -1,5 +1,5 @@
 # Algorithms
-A personal collection of useful implementations of algorithms and data structures in Java. (Work in progress)
+A personal collection of useful implementations of algorithms and data structures in Java. (Work in progress).
 
 ## Content
 
